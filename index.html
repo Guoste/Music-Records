@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo time</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Mano albumai</h1>
+        </div>
+    </header>
+
+    <section class="container">
+
+        <div class="text-right">
+            <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum">Pridėti naują</button>
+        </div>
+<div>
+    <input type="text" name="" id="">
+    <button class="btn" type="button">Ieškoti</button>
+</div>
+<hr>
+        <div class="album-list"></div>
+
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newAlbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Pridėti naują albumą</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="music-records" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="artist" class="col-sm-2 control-label">Atlikėjas</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="artist" placeholder="Atlikėjas">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="album" class="col-sm-2 control-label">Albumo pavadinimas</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="album">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="releaseDate" class="col-sm-2 control-label">Metai</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="releaseDate">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="genre" class="col-sm-2 control-label">Genre</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="genre">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="image" class="col-sm-2 control-label">Paveiksliukas</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="image">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="success-message">
+                        Duomenys išsaugoti. <a href="#">Norite pridėti dar vieną?</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                    <button type="button" class="btn btn-primary">Pridėti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="node_modules/promise-polyfill/promise.js"></script>
+    <script src="node_modules/whatwg-fetch/fetch.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

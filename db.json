@@ -1,0 +1,28 @@
+{
+  "albums": [
+    {
+      "artist": "Miike",
+      "album": "Miike",
+      "releaseDate": "2017",
+      "genre": "indie, pop",
+      "image": "Miike.Snow.jpg",
+      "id": 1
+    },
+    {
+      "artist": "raeg",
+      "album": "ag",
+      "releaseDate": "2015",
+      "genre": "rock, pop",
+      "image": "Night_Visions_Album_Cover.jpeg",
+      "id": 2
+    },
+    {
+      "artist": "Imagine",
+      "album": "Miike",
+      "releaseDate": "2017",
+      "genre": "indie, pop",
+      "image": "Miike.Snow.jpg",
+      "id": 3
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Music records",
+  "version": "1.0",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "promise-polyfill": "6.1.0",
+    "whatwg-fetch": "^2.0.3"
+  }
+}
