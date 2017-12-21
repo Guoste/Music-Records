@@ -1,28 +1,28 @@
 {
   "albums": [
     {
-      "artist": "Miike",
-      "album": "Miike",
-      "releaseDate": "2017",
-      "genre": "indie, pop",
-      "image": "Miike.Snow.jpg",
-      "id": 1
-    },
-    {
-      "artist": "raeg",
-      "album": "ag",
+      "artist": "Imagine Dragons",
+      "album": "Night Visions",
       "releaseDate": "2015",
       "genre": "rock, pop",
       "image": "Night_Visions_Album_Cover.jpeg",
       "id": 2
     },
     {
-      "artist": "Imagine",
-      "album": "Miike",
-      "releaseDate": "2017",
+      "artist": "Miike Snow",
+      "album": "Miike Snow",
+      "releaseDate": "2009",
       "genre": "indie, pop",
       "image": "Miike.Snow.jpg",
       "id": 3
+    },
+    {
+      "artist": "Massive Attack",
+      "album": "Holigoland",
+      "releaseDate": "2009",
+      "genre": "trip hop",
+      "image": "massive-attack.jpg",
+      "id": 4
     }
   ]
 }

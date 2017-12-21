@@ -6,37 +6,32 @@ const submitBtn = document.querySelector(".modal .modal-footer > .btn-primary");
 const closeBtn = document.querySelector(".modal .modal-footer > .btn-default");
 const addOther = document.querySelector(".success-message a");
 const deleteBtn = document.querySelector(".delete");
+const searchBtn = document.querySelector(".search");
 // Formos laukai
 const artistInput = document.getElementById("artist");
 const albumInput = document.getElementById("album");
 const releaseDateInput = document.getElementById("releaseDate");
 const imageInput = document.getElementById("image");
 const genreInput = document.getElementById("genre");
+const searchInput = document.querySelector(".search-input");
 
 const albumListElement = document.querySelector(".album-list");
 
 let allAlbums = [];
 const serverName = "http://localhost:3026"; 
-// Patikriname ar turime išsaugotą albumą localStorage
-// Jei turime, tada atvaizduojame HTML'e
-// if (localStorage.albums) {
-
-    // duomenys iš localStorage
-    // allAlbums = JSON.parse(localStorage.albums);
 
 
-    // duomenys iš serverio
-    fetch(serverName + "/albums")
-        .then(function(response){
-            response.json()
-                .then(function(albums) {
-                    // Išsisaugom visus albumus
-                    allAlbums = albums;
-
-                    // Spausdinam į HTML
-                    renderAlbums(allAlbums);
-                });
-        })
+// duomenys iš serverio
+ fetch(serverName + "/albums")
+    .then(function(response){
+        response.json()
+            .then(function(albums) {
+                 // Išsisaugom visus albumus
+                 allAlbums = albums;
+                // Spausdinam į HTML
+                renderAlbums(allAlbums);
+            });
+    })
 
 // }
 
@@ -44,6 +39,7 @@ const serverName = "http://localhost:3026";
 // Registruojam mygtuko paspaudimus
 submitBtn.addEventListener("click", saveAlbum);
 addOther.addEventListener("click", deleteFormFields);
+searchBtn.addEventListener("click", filterAlbums);
 
 // Funkcija, kuri saugo albumą
 function saveAlbum() {
@@ -53,7 +49,8 @@ function saveAlbum() {
         "album": albumInput.value,
         "releaseDate": releaseDateInput.value,
         "genre": genreInput.value,
-        "image": imageName
+        "image": imageName,
+        "id": "",
     };
     // Išsaugome albumą į localStorage
 
@@ -64,16 +61,12 @@ function saveAlbum() {
             body: JSON.stringify(album)
         }).then(function(response){
             response.json()
-            }).then(function(result){
-            console.log("Išsaugojo, response", response);
-            // Išsisaugom albumą į bendrą sąrašą
-            album.id = result.id;
-            allAlbums.push(album);
-            // Atvaizduojame albumą HTML'e
-            renderAlbums(allAlbums);
-            })
-
-        
+              .then(function(result){
+                album.id = result.id;
+                allAlbums.push(album);
+                renderAlbums(allAlbums);
+              });
+        })
 }
 
 function renderAlbums(albums) {
@@ -89,11 +82,13 @@ function renderAlbums(albums) {
                     <div>${renderGenres(album)}</div>
                     ${album.releaseDate}
                 </div>
-                <button class="btn btn-danger" onclick="deleteAlbum(${album.id})">Delete</button>
+                <button class="btn btn-danger" onclick="deleteAlbum(${album.id})">Ištrinti</button>
+                <a target="_blank" href="https://www.youtube.com/results?search_query=${album.artist}+${album.album}">Klausytis</a>
             </div>
         `;
     });
     
+  
     // Viena operacija - įrašau visą rezultatą
     albumListElement.innerHTML = resultHtml;
 }
@@ -118,16 +113,33 @@ function deleteFormFields () {
     genreInput.value = "";
 }
 
-
+     // funkcija, kuri ištrina albumą
 function deleteAlbum(id) {
-fetch(serverName  + "/albums/" + id, {
-    method: "delete"
-}).then(function(response) {
-    console.log("Albumas ištrintas")
-}).catch(function(error){
-    console.log("Albumas neištrintas")
-})
-let albumToRemove = document.querySelector(`[data-id="${id}"]`);
-albumToRemove.remove();
+    fetch(serverName + "/albums/" + id, {
+     method: "delete"
+    }).then(
+        function(response) {
+        console.log("Albumas ištrintas")
+    }).catch(
+        function(error){
+            console.log("Albumas neištrintas", error);
+        });
+
+    let albumToRemove = document.querySelector(`[data-id="${id}"]`);
+        albumToRemove.remove();
 }
+
+// funkcija, kuri vykdo paiešką
+function filterAlbums() {
+    let filteredAlbums = allAlbums.filter(function(album){
+        let result = album.artist.toLowerCase().indexOf(searchInput.value.toLowerCase());
+        if (result === -1) {
+            return false;
+        }
+        return  true; 
+     });
+    renderAlbums(filteredAlbums);
+}
+
+
 
