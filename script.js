@@ -75,15 +75,15 @@ function renderAlbums(albums) {
     // Išsisaugom kiekvieno albumo html
     albums.forEach(function(album) {
         resultHtml += `
-            <div class="album clearfix panel panel-default" data-id="${album.id}">
-                <div class="panel-body">
+        <div class="album clearfix panel panel-default" data-id="${album.id}">
+        <div class="panel-body">
+        <a target="_blank" class="btn btn-warning btn-xs play text-right" href="https://www.youtube.com/results?search_query=${album.artist}+${album.album}">Klausytis <i class="material-icons">play_arrow</i> </a>
                     <img src="upload/${album.image}" alt="" class="pull-left" width="150">
                     <h3>${album.album} <span class="artist-name">${album.artist}</span></h3>
                     <div>${renderGenres(album)}</div>
                     ${album.releaseDate}
                 </div>
-                <button class="btn btn-danger" onclick="deleteAlbum(${album.id})">Ištrinti</button>
-                <a target="_blank" href="https://www.youtube.com/results?search_query=${album.artist}+${album.album}">Klausytis</a>
+                <button class="btn btn-xs btn-danger delete text-right" onclick="deleteAlbum(${album.id})"><i class="material-icons">delete</i></button>
             </div>
         `;
     });
@@ -132,11 +132,15 @@ function deleteAlbum(id) {
 // funkcija, kuri vykdo paiešką
 function filterAlbums() {
     let filteredAlbums = allAlbums.filter(function(album){
-        let result = album.artist.toLowerCase().indexOf(searchInput.value.toLowerCase());
-        if (result === -1) {
-            return false;
+        let resultArtist = album.artist.toLowerCase().indexOf(searchInput.value.toLowerCase());
+        let resultAlbum = album.album.toLowerCase().indexOf(searchInput.value.toLowerCase());
+        let resultGenre = album.genre.toLowerCase().indexOf(searchInput.value.toLowerCase());
+        let resultYears = album.releaseDate.indexOf(searchInput.value);
+        
+        if (resultArtist !== -1 || resultAlbum !==-1 || resultGenre !==-1 || resultYears !== -1) {
+            return true;
         }
-        return  true; 
+        return  false; 
      });
     renderAlbums(filteredAlbums);
 }

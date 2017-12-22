@@ -10,6 +10,7 @@ header {
 
 .btn-show-modal {
     margin: 20px 0;
+    font-weight: bold;
 }
 
 .album img {
@@ -29,4 +30,15 @@ h3 {
 .artist-name {
     color: rgb(117, 117, 117);
     font-size: 22px;
+}
+
+.play{
+    font-weight: bold;
+}
+.play i {
+    position: relative;
+    top: 5px;
+}
+.delete {
+  margin: 10px;
 }
